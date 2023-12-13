@@ -14,7 +14,7 @@ void cd_dot_get(data_container *data)
 	char *target_dir, *copy_current_path, *tokenized_path;
 
 	getcwd(current_path, sizeof(current_path));
-	copy_current_path = custom_strdup(current_path);
+	copy_current_path = input_strdup(current_path);
 	put_envn("OLDPWD", copy_current_path, data);
 	target_dir = data->args[1];
 	if (custom_strcmp(".", target_dir) == 0)
@@ -73,10 +73,10 @@ void cd_to_get(data_container *data)
 		return;
 	}
 
-	copy_current_path = custom_strdup(current_path);
+	copy_current_path = input_strdup(current_path);
 	put_envn("OLDPWD", copy_current_path, data);
 
-	copy_target_dir = custom_strdup(target_dir);
+	copy_target_dir = input_strdup(target_dir);
 	put_envn("PWD", copy_target_dir, data);
 
 	free(copy_current_path);
@@ -100,14 +100,14 @@ void cd_previous_get(data_container *data)
 	char *previous_pwd, *old_pwd, *copy_current_path, *copy_old_pwd;
 
 	getcwd(current_path, sizeof(current_path));
-	copy_current_path = custom_strdup(current_path);
+	copy_current_path = input_strdup(current_path);
 
 	old_pwd = obtain_envn("OLDPWD", data->envn);
 
 	if (old_pwd == NULL)
 		copy_old_pwd = copy_current_path;
 	else
-		copy_old_pwd = custom_strdup(old_pwd);
+		copy_old_pwd = input_strdup(old_pwd);
 
 	put_envn("OLDPWD", copy_current_path, data);
 
@@ -143,7 +143,7 @@ void cd_to_home_get(data_container *data)
 	char current_path[PATH_MAX];
 
 	getcwd(current_path, sizeof(current_path));
-	previous_pwd = custom_strdup(current_path);
+	previous_pwd = input_strdup(current_path);
 
 	home_directory = obtain_envn("HOME", data->envn);
 
