@@ -38,7 +38,7 @@ char *custom_which(char *command, char **environment_variable)
 	path = obtain_envn("PATH", environment_variable);
 	if (path)
 	{
-		ptr_path = input_strdup(path);
+		ptr_path = custom_strdup(path);
 		len_cmd = custom_strlen(command);
 		token_path = custom_strtok(ptr_path, ":");
 		i = 0;

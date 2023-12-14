@@ -1,9 +1,9 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -68,6 +68,22 @@ typedef struct c_line_list_s
 } c_line_list;
 
 /**
+ * struct var_list - single linked list
+ * @len_var: length of the variable
+ * @value: value of the variable
+ * @len_value: length of the value
+ * @next: next node
+ * Description: single linked list to store variables
+ */
+typedef struct var_list
+{
+	int len_var;
+	char *value;
+	int len_value;
+	struct var_list *next;
+} r_var;
+
+/**
  * struct builtin_s - Builtin structure for command args.
  * @alias: name of the command builtin usedi.e cd, env, etc
  * @f: pointer to the data type function
@@ -120,7 +136,7 @@ int is_number(const char *str);
 char *custom_strtok(char input_str[], const char *delimiter);
 int char_cmp(char s[], const char *delimiter);
 int custom_strlen(const char *str);
-char *input_strdup(const char *str);
+char *custom_strdup(const char *str);
 
 
 
@@ -196,4 +212,4 @@ int err_sep_op(char *insert, int n, char final);
 int char_dup(char *insert, int n);
 
 
-#endif  /* SHELL_H */
+#endif
