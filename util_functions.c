@@ -50,7 +50,7 @@ void support_unsetenv_command(void)
  */
 void assist_general_command(void)
 {
-	char *help = "$$ bash, version 1.0(1)-release\n";
+	char *help = "^-^ bash, version 1.0(1)-release\n";
 
 	write(STDOUT_FILENO, help, custom_strlen(help));
 	help = "These commands are defined internally.Type 'help' to see the list";
