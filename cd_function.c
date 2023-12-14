@@ -1,40 +1,5 @@
 #include "shell.h"
 
-
-/**
- * cd_to_get - Changes the current working directory
- * to a user-specified directory
- *
- * @data: Pointer to data relevant to the operation (e.g., directories).
- * Return: This function does not return any value.
- */
-void cd_to_get(data_container *data)
-{
-	char current_path[PATH_MAX];
-	char *target_dir, *copy_current_path, *copy_target_dir;
-
-	getcwd(current_path, sizeof(current_path));
-
-	target_dir = data->args[1];
-	if (chdir(target_dir) == -1)
-	{
-		obtain_error(data, 2);
-		return;
-	}
-
-	copy_current_path = custom_strdup(current_path);
-	put_envn("OLDPWD", copy_current_path, data);
-
-	copy_target_dir = custom_strdup(target_dir);
-	put_envn("PWD", copy_target_dir, data);
-
-	free(copy_current_path);
-	free(copy_target_dir);
-
-	data->stat = 0;
-	chdir(target_dir);
-}
-
 /**
  *cd_dot_get - Changes the current working directory to the parent directory.
  *
@@ -85,6 +50,40 @@ void cd_dot_get(data_container *data)
 	}
 	data->stat = 0;
 	free(copy_current_path);
+}
+
+/**
+ * cd_to_get - Changes the current working directory
+ * to a user-specified directory
+ *
+ * @data: Pointer to data relevant to the operation (e.g., directories).
+ * Return: This function does not return any value.
+ */
+void cd_to_get(data_container *data)
+{
+	char current_path[PATH_MAX];
+	char *target_dir, *copy_current_path, *copy_target_dir;
+
+	getcwd(current_path, sizeof(current_path));
+
+	target_dir = data->args[1];
+	if (chdir(target_dir) == -1)
+	{
+		obtain_error(data, 2);
+		return;
+	}
+
+	copy_current_path = custom_strdup(current_path);
+	put_envn("OLDPWD", copy_current_path, data);
+
+	copy_target_dir = custom_strdup(target_dir);
+	put_envn("PWD", copy_target_dir, data);
+
+	free(copy_current_path);
+	free(copy_target_dir);
+
+	data->stat = 0;
+	chdir(target_dir);
 }
 
 /**
