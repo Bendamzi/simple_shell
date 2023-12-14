@@ -48,7 +48,7 @@ void looping_sh(data_container *data)
 	loop_sh = 1;
 	while (loop_sh == 1)
 	{
-		write(STDIN_FILENO, "$$ ", 4);
+		write(STDIN_FILENO, "^-^ ", 4);
 		insert = read_input(&n);
 		if (n != -1)
 		{
