@@ -50,22 +50,22 @@ void support_unsetenv_command(void)
  */
 void assist_general_command(void)
 {
-	char *help = "$$ bash, version 1.0(1)-release\n";
+	const char *help[] = {
+		"$$ bash, version 1.0(1)-release\n",
+		"These commands are defined internally. Type 'help' to see the list",
+		"Type 'help name' to find out more about the function 'name'.\n\n ",
+		" alias: alias [name=['string']]\n cd: cd [-L|[-P [-e]] [-@]] [dir]\n",
+		"exit: exit [n]\n  env: env [option] [name=value] [command [args]]\n",
+		"setenv: setenv [variable] [value]\n  unsetenv: unsetenv [variable]\n"
+	};
 
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = "These commands are defined internally.Type 'help' to see the list";
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = "Type 'help name' to find out more about the function 'name'.\n\n ";
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = " alias: alias [name=['string']]\n cd: cd [-L|[-P [-e]] [-@]] ";
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = "[dir]\nexit: exit [n]\n  env: env [option] [name=value] [command ";
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = "[args]]\n  setenv: setenv [variable] [value]\n  unsetenv: ";
-	write(STDOUT_FILENO, help, custom_strlen(help));
-	help = "unsetenv [variable]\n";
-	write(STDOUT_FILENO, help, custom_strlen(help));
+	unsigned int i;
+
+	for (i = 0; i < sizeof(help) / sizeof(help[0]); ++i)
+		write(STDOUT_FILENO, help[i], custom_strlen(help[i]));
 }
+
+
 /**
  * print_exit_help - Help provide information for exit command.
  *

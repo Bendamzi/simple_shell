@@ -101,47 +101,37 @@ int initial_char(char *insert, int *n)
 
 void print_syn_err(data_container *sh_data, char *insert, int n, int bool)
 {
-	char *msg_1, *msg_2, *msg_3, *err, *count;
+	char *msg_1 = NULL;
+	char *msg_2 = ": Syntax error: \"";
+	char *msg_3 = "\" unexpected\n";
+	char *count = intToStr(sh_data->count);
+	char *err;
 	int len;
 
-	if (insert[n] == ';')
-	{
-		if (bool == 0)
-			msg_1 = (insert[n + 1] == ';' ? ";;" : ";");
-		else
-			msg_1 = (insert[n - 1] == ';' ? ";;" : ";");
-	}
+	if ((insert[n] == ';' &&
+	(bool == 0 ? insert[n + 1] : insert[n - 1]) == ';') ||
+			(insert[n] == '|' && insert[n + 1] == '|') ||
+			(insert[n] == '&' && insert[n + 1] == '&'))
+		msg_1 = (insert[n] == ';' ? ";;" : (insert[n] == '|' ? "||" : "&&"));
 
-	if (insert[n] == '|')
-		msg_1 = (insert[n + 1] == '|' ? "||" : "|");
+	len = custom_strlen(sh_data->argv[0]) + custom_strlen(count)
+	+ custom_strlen(msg_1) + custom_strlen(msg_2) + custom_strlen(msg_3) + 2;
 
-	if (insert[n] == '&')
-		msg_1 = (insert[n + 1] == '&' ? "&&" : "&");
-
-	msg_2 = ": Syntax error: \"";
-	msg_3 = "\" unexpected\n";
-	count = intToStr(sh_data->count);
-	len = custom_strlen(sh_data->argv[0]) + custom_strlen(count);
-	len += custom_strlen(msg_1) + custom_strlen(msg_2) + custom_strlen(msg_3) + 2;
-
-	err = malloc(sizeof(char) * (len + 1));
-	if (err == 0)
+	err = malloc(len + 1);
+	if (err == NULL)
 	{
 		free(count);
 		return;
 	}
-	custom_strcpy(err, sh_data->argv[0]);
-	custom_strcat(err, ": ");
-	custom_strcat(err, count);
-	custom_strcat(err, msg_2);
-	custom_strcat(err, msg_1);
-	custom_strcat(err, msg_3);
-	custom_strcat(err, "\0");
 
+	sprintf(err, "%s: %s%s%s%s%s", sh_data->argv[0],
+	count, msg_2, msg_1 ? msg_1 : "", msg_3, "\0");
 	write(STDERR_FILENO, err, len);
 	free(err);
 	free(count);
 }
+
+
 
 /**
  * verify_syn_err - to find and print a syntax error
