@@ -1,16 +1,17 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
+#include <limits.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <signal.h>
-#include <limits.h>
+#include <sys/stat.h>
+#include <string.h>
 
 #define BUFFERSIZE 1024
 #define TOKEN_BUFFERSIZE 128
@@ -95,17 +96,16 @@ typedef struct builtin_s
 	int (*f)(data_container *datash);
 } builtin;
 
-char *strcat_custom(data_container *, char *, char *, char *);
-char *fetch_error_custom(data_container *data);
-char *missing_file_error(data_container *data);
-char *shell_terminate_error(data_container *data);
-
 void support_unsetenv_command(void);
 void env_variable_support(void);
 void support_env_tasks(void);
 void assist_general_command(void);
 void print_exit_help(void);
 
+char *strcat_custom(data_container *, char *, char *, char *);
+char *fetch_error_custom(data_container *data);
+char *missing_file_error(data_container *data);
+char *shell_terminate_error(data_container *data);
 
 char *custom_strcat(char *custom_dest, const char *source);
 char *custom_strcpy(char *custom_dest, char *source);
@@ -192,6 +192,12 @@ int is_exec(data_container *data);
 char *loc_cmd(char *n_cmd, char **envn);
 int _iscdire(char *way, int *n);
 
+int verify_syn_err(data_container *sh_data, char *insert);
+void print_syn_err(data_container *sh_data, char *insert, int n, int bool);
+int initial_char(char *insert, int *n);
+int err_sep_op(char *insert, int n, char final);
+int char_dup(char *insert, int n);
+
 int del_envn(data_container *data);
 int cmp_envn(data_container *data);
 void put_envn(char *alias, char *val, data_container *data);
@@ -204,12 +210,6 @@ int close_shell(data_container *data);
 int execute_line(data_container *data);
 
 void custom_rev_string(char *str);
-
-int verify_syn_err(data_container *sh_data, char *insert);
-void print_syn_err(data_container *sh_data, char *insert, int n, int bool);
-int initial_char(char *insert, int *n);
-int err_sep_op(char *insert, int n, char final);
-int char_dup(char *insert, int n);
 
 
 #endif

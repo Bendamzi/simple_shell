@@ -64,8 +64,6 @@ void assist_general_command(void)
 	for (i = 0; i < sizeof(help) / sizeof(help[0]); ++i)
 		write(STDOUT_FILENO, help[i], custom_strlen(help[i]));
 }
-
-
 /**
  * print_exit_help - Help provide information for exit command.
  *

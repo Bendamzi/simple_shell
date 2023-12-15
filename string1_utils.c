@@ -7,24 +7,13 @@
  */
 void custom_rev_string(char *str)
 {
-	int counter = 0, i, j;
-	char *string, temp;
+	int len = strlen(str);
 
-	while (counter >= 0)
+	int i;
+	for (i = 0; i < len / 2; ++i)
 	{
-		if (str[counter] == '\0')
-			break;
-		counter++;
-	}
-	string = str;
-
-	for (i = 0; i < (counter - 1); i++)
-	{
-		for (j = i + 1; j > 0; j--)
-		{
-			temp = *(string + j);
-			*(string + j) = *(string + (j - 1));
-			*(string + (j - 1)) = temp;
-		}
+		char temp = str[i];
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = temp;
 	}
 }
