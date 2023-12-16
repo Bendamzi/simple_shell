@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * append_sep_to_end - function to append separator
  * @list: pointer ot the linked list head

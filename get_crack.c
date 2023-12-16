@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * replace_char - Replace non-printable characters with '|' or '&'.
  * @insert: The string in which replacements are made.

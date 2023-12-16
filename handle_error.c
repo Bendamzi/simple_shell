@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * strcat_custom - Concatenates a message with custom behavior.
  *

@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * read_input - Reads a line of input from the user.
  * @n: Size of the buffer to store the input.

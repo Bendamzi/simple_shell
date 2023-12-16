@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * env_assist - Display brief summaries of builtin commands.
  * Return: void.

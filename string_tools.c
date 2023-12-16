@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * custom_strcat - function for append 2 strings
  * @custom_dest: pointer the destination of the copied string

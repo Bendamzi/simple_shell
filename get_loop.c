@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * del_comment - Removes comments from the input string
  * @insert: The input string containing comments.

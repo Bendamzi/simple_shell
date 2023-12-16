@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * support_env_tasks - to enhance 'env' command functionality
  *

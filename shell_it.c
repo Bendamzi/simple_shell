@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * change_directory_command - changes directory
  * @data: data format

@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * system_environment_error - Handles errors related to env.
  *

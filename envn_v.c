@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * cmp_envn_alias - Compares envn variable names with the name passed.
  * @n_env: the name of the environment variable

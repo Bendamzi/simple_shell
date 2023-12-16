@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * count_digit - function to get the length of a number.
  * @n: type int number.

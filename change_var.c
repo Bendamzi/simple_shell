@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * verify_envn - to verift if the ariable is an envnironment variable
  * @heads: the linked list

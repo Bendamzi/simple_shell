@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * obtain_builtin - Finds and returns the function
  * pointer for a given built-in command.
